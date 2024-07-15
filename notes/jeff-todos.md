@@ -1,7 +1,6 @@
 # Stuff for Jeff To Do
 
 
-- [ ] Get people a copy of my code, show how to pull.
 - [ ] "Finish" the Nav-Bar
     - Intro to State: Signals, Inputs, Outputs
     - Intro to Control Flow in Angular Templates
