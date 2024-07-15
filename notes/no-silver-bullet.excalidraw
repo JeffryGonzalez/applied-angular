@@ -1,0 +1,48 @@
+{
+  "type": "excalidraw",
+  "version": 2,
+  "source": "https://marketplace.visualstudio.com/items?itemName=pomdtr.excalidraw-editor",
+  "elements": [
+    {
+      "id": "ytgyGC-hO9ZSoXByWzCYF",
+      "type": "text",
+      "x": 1258,
+      "y": 112,
+      "width": 64.179931640625,
+      "height": 25,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 499017595,
+      "version": 30,
+      "versionNonce": 1258622389,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1721064193619,
+      "link": "https://worrydream.com/refs/Brooks_1986_-_No_Silver_Bullet.pdf",
+      "locked": false,
+      "text": "Source",
+      "fontSize": 20,
+      "fontFamily": 1,
+      "textAlign": "left",
+      "verticalAlign": "top",
+      "baseline": 18,
+      "containerId": null,
+      "originalText": "Source",
+      "lineHeight": 1.25
+    }
+  ],
+  "appState": {
+    "gridSize": null,
+    "viewBackgroundColor": "#ffffff"
+  },
+  "files": {}
+}
