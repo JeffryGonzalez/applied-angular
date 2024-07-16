@@ -20,6 +20,4 @@ import { NavbarLink } from '../models';
 })
 export class LinkItemChildrenComponent {
   link = input.required<NavbarLink>();
-
-  name = 'Jane';
 }

@@ -1,18 +1,27 @@
 import { AsyncPipe } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { UserFeature } from '../../../state/user/user-feature';
 
 @Component({
   selector: 'app-user-menu',
   standalone: true,
-  imports: [AsyncPipe],
+  imports: [],
   providers: [],
 
-  template: ` <div class="btn">{{ (user$ | async)?.sub }}</div> `,
+  template: `
+    <div class="btn">
+      @if(user() === '') {
+      <span class="loading loading-infinity loading-md"></span>
+      } @else {
+      {{ user() }}
+      }
+    </div>
+  `,
   styles: ``,
 })
 export class UserMenuComponent {
-  client = inject(HttpClient);
+  store = inject(Store);
 
-  user$ = this.client.get<{ sub: string }>('/api/user');
+  user = this.store.selectSignal(UserFeature.selectSub);
 }

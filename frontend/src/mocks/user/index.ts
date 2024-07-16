@@ -1,8 +1,9 @@
-import { http, HttpResponse } from 'msw';
+import { http, HttpResponse, delay } from 'msw';
 
 const handlers = [
-  http.get('/api/user', () => {
-    return HttpResponse.json({ sub: 'Hakim Bradley' });
+  http.get('/api/user', async () => {
+    await delay(4000);
+    return HttpResponse.json({ sub: 'Charlie Brown' });
   }),
 ];
 
