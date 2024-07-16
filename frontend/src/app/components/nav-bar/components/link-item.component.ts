@@ -7,10 +7,12 @@ import { RouterLink } from '@angular/router';
     standalone: true,
     imports: [RouterLink],
     template: `
+    
         <li><a [routerLink]="link().link">{{link().label}}</a></li>
     `,
     styles: ``
 })
 export class LinkItemComponent {
     link = input.required<NavItem>();
+   
 }

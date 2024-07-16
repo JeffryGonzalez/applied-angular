@@ -13,7 +13,7 @@ import { LinkItemComponent } from './link-item.component';
       @for(link of listOfLinks(); track $index) { @if(link.children) {
       <app-link-item-children [link]="link" />
       } @else {
-      <app-link-item [link]="link" />
+      <app-link-item [link]="link"  />
       } }
     </ul>
   `,
@@ -21,4 +21,5 @@ import { LinkItemComponent } from './link-item.component';
 })
 export class MainMenuComponent {
   listOfLinks = input.required<NavbarLinks>();
+  
 }
