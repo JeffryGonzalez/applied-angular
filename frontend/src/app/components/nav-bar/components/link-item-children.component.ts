@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
+import { NavbarLink } from '../models';
 
 @Component({
     selector: 'app-link-item-children',
@@ -18,5 +19,5 @@ import { Component } from '@angular/core';
     styles: ``
 })
 export class LinkItemChildrenComponent {
-
+  link = input.required<NavbarLink>();
 }
