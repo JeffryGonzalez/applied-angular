@@ -1,7 +1,3 @@
+import user from './user';
 
-
-
-export const handlers = [
-
-
-];
+export const handlers = [...user];
