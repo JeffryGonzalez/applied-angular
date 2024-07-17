@@ -1,4 +1,5 @@
-import { createFeature, createReducer, createSelector } from '@ngrx/store';
+import { createFeature, createReducer, createSelector, on } from '@ngrx/store';
+import { SoftwareListActions } from '../actions/list.actions';
 
 export type SoftwareItem = {
   id: string;
@@ -20,7 +21,13 @@ const initialState: UserSoftwareState = {
 
 export const UserSoftwareFeature = createFeature({
   name: 'User Software',
-  reducer: createReducer(initialState),
+  reducer: createReducer(
+    initialState,
+    on(SoftwareListActions.listFilteredBy, (s, { payload }) => ({
+      ...s,
+      titleFilter: payload,
+    }))
+  ),
   extraSelectors: ({ selectList, selectTitleFilter }) => ({
     selectFilteredList: createSelector(
       selectList,

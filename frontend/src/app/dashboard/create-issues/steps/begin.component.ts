@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { UserSoftwareFeature } from '../../state/reducers/user-software.feature';
+import { SoftwareListActions } from '../../state/actions/list.actions';
 
 @Component({
   selector: 'app-create-issue-begin',
@@ -18,8 +19,15 @@ import { UserSoftwareFeature } from '../../state/reducers/user-software.feature'
               <div>
                 <div>
                   <label class="input input-bordered flex items-center gap-2">
-                    <input type="text" class="grow" placeholder="Search" />
-                    <span class="badge badge-info">?</span>
+                    <input
+                      #taco
+                      type="text"
+                      class="grow"
+                      placeholder="Search"
+                    />
+                    <span (click)="filter(taco.value)" class="badge badge-info"
+                      >?</span
+                    >
                   </label>
                 </div>
                 <table class="table">
@@ -44,7 +52,7 @@ import { UserSoftwareFeature } from '../../state/reducers/user-software.feature'
                     </tr>
                     } } @empty {
 
-                    <p>You have no software</p>
+                    <p>No software matches your search.</p>
                     }
                   </tbody>
                 </table>
@@ -66,4 +74,8 @@ import { UserSoftwareFeature } from '../../state/reducers/user-software.feature'
 export class BeginComponent {
   #store = inject(Store);
   software = this.#store.selectSignal(UserSoftwareFeature.selectFilteredList);
+
+  filter(what: string) {
+    this.#store.dispatch(SoftwareListActions.listFilteredBy({ payload: what }));
+  }
 }
