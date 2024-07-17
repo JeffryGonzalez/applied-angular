@@ -1,4 +1,4 @@
-import { createFeature, createReducer, on } from '@ngrx/store';
+import { createFeature, createReducer, createSelector, on } from '@ngrx/store';
 import { User } from '../models';
 import { UserActions } from './actions';
 
@@ -12,4 +12,7 @@ export const UserFeature = createFeature({
     initialState,
     on(UserActions.userLoaded, (_, action) => action.payload)
   ),
+  extraSelectors: ({ selectSub }) => ({
+    selectUserLoaded: createSelector(selectSub, (sub) => sub !== ''),
+  }),
 });

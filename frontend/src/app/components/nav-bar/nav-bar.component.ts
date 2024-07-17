@@ -30,5 +30,9 @@ export class NavBarComponent {
       label: 'Students',
       link: '/students',
     },
+    {
+      label: 'Dashboard',
+      link: '/dashboard',
+    },
   ]);
 }
