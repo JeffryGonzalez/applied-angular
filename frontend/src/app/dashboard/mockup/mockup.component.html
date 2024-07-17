@@ -1,0 +1,350 @@
+<pre>
+    This is a mockup, showing the basic flow and various modes.
+    
+    </pre
+>
+
+<div class="p-12 m-8 bg-slate-800 border-2 border-green-200">
+  <h2 class="text-lg font-bold">No Entitled Software</h2>
+  <pre class="pb-12">
+    If a user has no entitled software, we should let them know that is what is up, and help them get help anyhow.</pre
+  >
+  <div class="card bg-base-100 shadow-xl">
+    <div class="card-body">
+      <h2 class="card-title">We'd love to help!</h2>
+      <p>
+        Sorry TacoName, but we don't have a record of you having any software
+        installed.
+      </p>
+      <div class="card-actions justify-start">
+        <button class="btn btn-primary">
+          Visit the Software Center And Get Some Software
+        </button>
+        <button class="btn btn-primary">
+          <span class="text-red-700">File an Issue Anyhow?</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="p-12 m-8 bg-slate-800 border-2 border-red-700">
+  <h2 class="text-lg font-bold">No Entitled Software</h2>
+  <pre class="pb-12">
+      Error Mode: Unable to load the user's software (distinct from loading, see below)
+      The retry should be throttled for 2s so they don't just spam the button.
+      </pre
+  >
+  <div class="card bg-base-100 shadow-xl">
+    <div class="card-body">
+      <h2 class="card-title">We'd love to help!</h2>
+      <p>
+        However, we are having a bit of a problem getting your list of software.
+        It's nothing you've done wrong, and we are working on it.
+      </p>
+      <div class="card-actions justify-start">
+        <button class="btn btn-primary">Retry?</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="p-12 m-8 bg-slate-800 border-2 border-blue-500">
+  <h2 class="text-lg font-bold">No Entitled Software</h2>
+  <pre class="pb-12">
+        Loading Mode: What to display if there is a delay in loading their software.
+        </pre
+  >
+  <div class="card bg-base-100 shadow-xl">
+    <div class="card-body">
+      <h2 class="card-title">We'd love to help!</h2>
+      <p>Getting setup...</p>
+      <div class="flex w-1/2 flex-col gap-4">
+        <div class="skeleton h-4 w-28"></div>
+        <div class="skeleton h-4 w-full"></div>
+        <div class="skeleton h-4 w-full"></div>
+        <div class="skeleton h-16 w-full"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<pre>
+        Various Happy Paths:
+        - Full Enchilada: Some users will have software on multiple platforms, and each platform may have several pieces of software, and that software will have multiple versions.
+        - One Platform: Some users will only have software entitled for one platform. There might be multiple pieces of software, and multiple versions.
+        - One Software, Multiple Versions.
+        - One Piece of Software
+    </pre
+>
+
+<div class="p-12 m-8 bg-slate-800 border-2 border-green-200">
+  <h2 id="full" class="text-lg font-bold">Full Enchilada</h2>
+  <pre class="pb-12">
+            Some users will have software on multiple platforms, and each platform may have several pieces of software, 
+            and that software will have multiple versions.
+            
+            The "requirements" make is sound like you can only file an issue for a specific version of a piece of software on a 
+            particular platform, however, what if they are having the same problem on multiple version, or on all platforms?
+            We can conform to the SoftwareCenter API, but let's not make the user do that.
+    
+            To them, the software is the primary thing.
+            </pre
+  >
+  <div>
+    <div class="card bg-base-100 shadow-xl">
+      <div class="card-body">
+        <h2 class="card-title">We'd love to help!</h2>
+        <p>What software are you having problems with?</p>
+        <p>You can make multiple requests for different software.</p>
+        <div>
+          <div class="card-actions justify-start">
+            <div class="flex">
+              <div>
+                <div>
+                  <label class="input input-bordered flex items-center gap-2">
+                    <input type="text" class="grow" placeholder="Search" />
+                    <span class="badge badge-info">?</span>
+                  </label>
+                </div>
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Software</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="hover">
+                      Visual Studio Code
+                    </tr>
+                    <tr>
+                      Davinci Resolve
+                    </tr>
+                    <tr class="hover">
+                      OBS Studio
+                    </tr>
+                    <tr>
+                      Jetbrains Rider
+                    </tr>
+                    <tr class="hover">
+                      Destiny 2
+                    </tr>
+                    <tr>
+                      ...
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <ul class="steps w-full pt-8">
+        <li class="step step-primary">Software</li>
+        <li class="step">Operating System</li>
+        <li class="step">Description</li>
+        <li class="step">Send it</li>
+      </ul>
+    </div>
+    <pre class="p-8">
+        Need a way to say how and when to move to the next step.
+    
+        Question: Should we show them all, or just the ones they are entitled for?
+            Perhaps: "If your operating system isn't listed here, please tell us in the description?"
+            Or: List them all, but indicate which they are entitled for, and give them the option of selecting others as "unlisted".
+    
+        Feature: Automatically select the operating system they are currently using.
+      </pre
+    >
+  </div>
+  <div>
+    <div class="card bg-base-100 shadow-xl">
+      <div class="card-body">
+        <div>
+          <span class="badge badge-success gap-2">Visual Studio Code</span>
+        </div>
+        <h2 class="card-title">We'd love to help!</h2>
+        <p>Can you tell us what operating system(s) you are using?</p>
+
+        <div>
+          <div>
+            <label class="cursor-pointer label">
+              <span class="label-text">
+                <input
+                  type="checkbox"
+                  checked="checked"
+                  class="checkbox checkbox-info mr-4"
+                />Windows</span
+              >
+            </label>
+          </div>
+          <div>
+            <label class="cursor-pointer label">
+              <span class="label-text">
+                <input
+                  type="checkbox"
+                  checked="checked"
+                  class="checkbox checkbox-info mr-4"
+                />MacOs</span
+              >
+            </label>
+          </div>
+          <div>
+            <label class="cursor-pointer label">
+              <span class="label-text">
+                <input
+                  type="checkbox"
+                  class="checkbox checkbox-info mr-4"
+                />Linux</span
+              >
+            </label>
+          </div>
+        </div>
+      </div>
+      <ul class="steps w-full pt-8">
+        <li class="step step-success">Software</li>
+        <li class="step step-primary">Operating System</li>
+        <li class="step">Description</li>
+        <li class="step">Send it</li>
+      </ul>
+    </div>
+  </div>
+  <div class="pt-8">
+    <div class="card bg-base-100 shadow-xl">
+      <div class="card-body">
+        <div>
+          <span class="badge badge-success gap-2">Visual Studio Code</span
+          ><span class="badge badge-success gap-2">Windows</span
+          ><span class="badge badge-success gap-2">MacOs</span>
+          <h2 class="card-title">We'd love to help!</h2>
+          <p>Can you tell us what operating system(s) you are using?</p>
+
+          <div>
+            <h3>What is the nature of your issue:</h3>
+            <div>
+              <div>
+                <label class="cursor-pointer label">
+                  <span class="label-text">
+                    <input
+                      type="radio"
+                      name="radio-2"
+                      class="radio radio-primary mr-2"
+                    />I have a question</span
+                  >
+                </label>
+              </div>
+              <div>
+                <label class="cursor-pointer label">
+                  <span class="label-text">
+                    <input
+                      type="radio"
+                      name="radio-2"
+                      class="radio radio-primary mr-2"
+                    />Something is not working the way I expect</span
+                  >
+                </label>
+              </div>
+            </div>
+          </div>
+          <div>
+            <h3>What is the impact of this issue?</h3>
+            <div>
+              <label class="cursor-pointer label">
+                <span class="label-text">
+                  <input
+                    type="checkbox"
+                    class="checkbox checkbox-info mr-4"
+                  />It's bad - I can't do my job.</span
+                >
+              </label>
+            </div>
+            <div>
+              <label class="cursor-pointer label">
+                <span class="label-text">
+                  <input
+                    type="checkbox"
+                    class="checkbox checkbox-info mr-4"
+                  />It's bad - And it is directly impacting the customers.</span
+                >
+              </label>
+            </div>
+            <div>
+              <h3>
+                Give us as much detail as possible about what you are
+                experiencing.
+              </h3>
+              <p>
+                Maybe it is a quick fix, or maybe it is something we'll need to
+                investigate. The more detail you give us, the faster we can
+                respond.
+              </p>
+              <div class="pt-4">
+                <textarea
+                  class="textarea textarea-bordered w-1/2"
+                  placeholder="About my issue"
+                ></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+        <ul class="steps w-full pt-8">
+          <li class="step step-success">Software</li>
+          <li class="step step-success">Operating System</li>
+          <li class="step step-primary">Description</li>
+          <li class="step">Send it</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="pt-8">
+    <div class="card bg-base-100 shadow-xl">
+      <div class="card-body">
+        <div>
+          <span class="badge badge-success gap-2">Visual Studio Code</span
+          ><span class="badge badge-success gap-2">Windows</span
+          ><span class="badge badge-success gap-2">MacOs</span>
+          <span class="badge badge-warning gap-2">Broken</span>
+
+          <span class="badge badge-error gap-2">Work Stoppage</span> ><span
+            class="badge badge-error gap-2"
+            >Customer Impact</span
+          >
+
+          <h2 class="card-title">We'd love to help!</h2>
+          <p>Can you tell us what operating system(s) you are using?</p>
+
+          <div>
+            <h3>Ok, here's what we have:</h3>
+            <div>
+              <p>
+                You are having an issue with Visual Studio Code on MacOs and
+                Linux.
+              </p>
+              <p>
+                Something isn't working properly, and it is keeping you from
+                doing your job and is having an impact on the customer.
+              </p>
+              <p>This sounds bad, so we'll get right on it!</p>
+              <div class="w-full">
+                <p>You describe the issue as:</p>
+                <p class="font-mono collapse p-8">
+                  The darn thing keeps crashing every time I run my application.
+                  I have tried it with several different source code
+                  repositories, all of which ran fine yesterday. This is a big
+                  fix we have to get out today, and my boss is breathing down my
+                  neck. Help me, Obi-Wan Kenobi, you are my only hope!
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <ul class="steps w-full pt-8">
+          <li class="step step-success">Software</li>
+          <li class="step step-success">Operating System</li>
+          <li class="step step-success">Description</li>
+          <li class="step step-primary">Send it</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

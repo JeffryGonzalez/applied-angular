@@ -3,6 +3,7 @@ import { StudentsComponent } from './students/students.component';
 import { inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { UserFeature } from './state/user/user-feature';
+import { UserDataService } from './state/services/user-data.service';
 
 export const routes: Routes = [
   {
@@ -28,6 +29,7 @@ export const routes: Routes = [
 
 function userIsLoadedGuard(): CanActivateFn {
   // don't use inject here. doesn't work. trust me.
+
   return () => {
     const store = inject(Store);
     const userLoaded = store.selectSignal(UserFeature.selectUserLoaded);
