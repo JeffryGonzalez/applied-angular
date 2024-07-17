@@ -65,5 +65,5 @@ import { UserSoftwareFeature } from '../../state/reducers/user-software.feature'
 })
 export class BeginComponent {
   #store = inject(Store);
-  software = this.#store.selectSignal(UserSoftwareFeature.selectList);
+  software = this.#store.selectSignal(UserSoftwareFeature.selectFilteredList);
 }
