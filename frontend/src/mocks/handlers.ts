@@ -1,3 +1,3 @@
 import user from './user';
-
-export const handlers = [...user];
+import software from './software-handler';
+export const handlers = [...user, ...software];

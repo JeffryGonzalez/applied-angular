@@ -7,6 +7,9 @@ import { inject } from '@angular/core';
 import { provideState, Store } from '@ngrx/store';
 import { UserFeature } from '../state/user/user-feature';
 import { UserSoftwareFeature } from './state/reducers/user-software.feature';
+import { EntitleSoftwareEffect } from './state/effects/software.effect';
+import { CreateIssuesComponent } from './create-issues/create-issues.component';
+import { BeginComponent } from './create-issues/steps/begin.component';
 
 export const DASHBOARD_ROUTES: Routes = [
   {
@@ -14,7 +17,7 @@ export const DASHBOARD_ROUTES: Routes = [
     canActivateChild: [userIsLoadedGuard()],
     providers: [
       provideState(UserSoftwareFeature),
-      provideEffects([DashboardNavigationEffect]),
+      provideEffects([DashboardNavigationEffect, EntitleSoftwareEffect]),
     ], // { navigateWhatever: createEffect() }
 
     component: DashboardComponent,
@@ -22,6 +25,21 @@ export const DASHBOARD_ROUTES: Routes = [
       {
         path: 'mock',
         component: MockupComponent,
+      },
+
+      {
+        path: 'create-issue',
+        component: CreateIssuesComponent,
+        children: [
+          {
+            path: 'begin',
+            component: BeginComponent,
+          },
+          // {
+          //   path: '',
+          //   redirectTo: 'begin',
+          // },
+        ],
       },
     ],
   },
