@@ -13,6 +13,7 @@ import { map } from 'rxjs';
       <h2>Labs for Applied Angular</h2>
       <ul>
         <li><a routerLink="counter">Counter</a></li>
+        <li><a routerLink="prefs">Preferences</a></li>
       </ul>
     </div>
 

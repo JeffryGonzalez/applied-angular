@@ -1,7 +1,15 @@
-import { Component, computed, effect, OnInit, signal } from '@angular/core';
+import {
+  Component,
+  computed,
+  effect,
+  inject,
+  OnInit,
+  signal,
+} from '@angular/core';
+import { CounterPreferencesService } from '../services/counter-prefs.service';
 
 @Component({
-  selector: 'app-',
+  selector: 'counter-component',
   standalone: true,
   imports: [],
   template: `
@@ -32,17 +40,19 @@ import { Component, computed, effect, OnInit, signal } from '@angular/core';
 export class CounterComponent {
   constructor() {}
 
+  counterPrefsService = inject(CounterPreferencesService);
+
   num = signal(0);
 
   fizzBuzz = signal('');
 
   increment() {
-    this.num.set(this.num() + 1);
+    this.num.set(this.num() + this.counterPrefsService.getCountBy());
     this.updateFizzBuzz();
   }
 
   decrement() {
-    this.num.set(this.num() - 1);
+    this.num.set(this.num() - this.counterPrefsService.getCountBy());
     this.updateFizzBuzz();
   }
 
