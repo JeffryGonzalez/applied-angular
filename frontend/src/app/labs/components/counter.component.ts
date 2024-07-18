@@ -22,6 +22,9 @@ import { Component, signal } from '@angular/core';
             <p style="vertical-align: middle; height: 32px; line-height: 32px;">
               {{ count() }}
             </p>
+            <p style="vertical-align: middle; height: 32px; line-height: 32px;">
+              {{ fizzBuzz() }}
+            </p>
           </div>
           <button
             (click)="add()"
@@ -39,13 +42,16 @@ export class CounterComponent {
   upperLimit = 15;
   lowerLimit = 0;
   count = signal(0);
+  fizzBuzz = signal('');
 
   add() {
     this.count.set(this.count() + 1);
+    this.updateFizzBuzz();
   }
 
   subtract() {
     this.count.set(this.count() - 1);
+    this.updateFizzBuzz();
   }
 
   greaterThanLowerLimit(): boolean {
@@ -54,5 +60,27 @@ export class CounterComponent {
 
   lessThanUpperLimit(): boolean {
     return this.count() == this.upperLimit;
+  }
+
+  updateFizzBuzz() {
+    const remainder_3 = this.count() % 3;
+    const remainder_5 = this.count() % 5;
+
+    if (remainder_3 == 0 && remainder_5 == 0) {
+      this.fizzBuzz.set('FizzBuzz');
+      return;
+    }
+
+    if (remainder_5 == 0) {
+      this.fizzBuzz.set('Buzz');
+      return;
+    }
+
+    if (remainder_3 == 0) {
+      this.fizzBuzz.set('Fizz');
+      return;
+    }
+
+    this.fizzBuzz.set('');
   }
 }
