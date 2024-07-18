@@ -32,7 +32,7 @@ import { UserPreferencesService } from '../state/services/user-preferences.servi
   styles: ``,
 })
 export class CounterComponents {
-  disabled = false;
+  disabled = true;
   fizz = false;
   buzz = false;
   fizzBuzz = false;
