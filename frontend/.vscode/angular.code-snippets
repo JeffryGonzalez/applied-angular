@@ -41,4 +41,10 @@
     ],
     "description": "Angular Standalone Component",
   },
+  "Arrow Function": {
+    "scope": "typescript",
+    "prefix": "arrow",
+    "body": ["($1) => {$2}"],
+    "description": "Regular Arrow Function",
+  },
 }
