@@ -37,6 +37,10 @@ export class NavBarComponent {
     {
       label: 'Labs',
       link: '/labs',
+      children: [
+        { label: 'Counter', link: '/labs/counter' },
+        { label: 'Preferences', link: '/labs/preferences' },
+      ],
     },
   ]);
 }

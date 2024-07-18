@@ -1,17 +1,23 @@
 import { Component, input } from '@angular/core';
 import { NavbarLink } from '../models';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-link-item-children',
   standalone: true,
-  imports: [],
+  imports: [RouterLink],
   template: `
     <li>
       <details>
-        <summary>Parent</summary>
+        <summary>
+          <a [routerLink]="link().link">{{ link().label }}</a>
+        </summary>
         <ul class="p-2">
-          <li><a>More Tacos</a></li>
-          <li><a>Submenu 2</a></li>
+          @for (childLink of link().children; track $index) {
+            <li>
+              <a [routerLink]="childLink.link">{{ childLink.label }}</a>
+            </li>
+          }
         </ul>
       </details>
     </li>
