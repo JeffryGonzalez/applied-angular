@@ -10,6 +10,7 @@ import { UserSoftwareFeature } from './state/reducers/user-software.feature';
 import { EntitleSoftwareEffect } from './state/effects/software.effect';
 import { CreateIssuesComponent } from './create-issues/create-issues.component';
 import { BeginComponent } from './create-issues/steps/begin.component';
+import { UiStateEvents, UiStateFeature } from '../state/ui-state';
 
 export const DASHBOARD_ROUTES: Routes = [
   {
@@ -30,6 +31,7 @@ export const DASHBOARD_ROUTES: Routes = [
       {
         path: 'create-issue',
         component: CreateIssuesComponent,
+        canActivateChild: [userSoftwareIsLoadedGuard()],
         children: [
           {
             path: 'begin',
@@ -50,7 +52,15 @@ function userIsLoadedGuard(): CanActivateFn {
 
   return () => {
     const store = inject(Store);
-    const userLoaded = store.selectSignal(UserFeature.selectUserLoaded);
-    return userLoaded();
+    const userLoaded = store.selectSignal(UiStateFeature.selectUser);
+    return userLoaded().isPresent;
+  };
+}
+
+function userSoftwareIsLoadedGuard(): CanActivateFn {
+  return () => {
+    // const store = inject(Store);
+    return inject(Store).selectSignal(UiStateFeature.selectUserSoftware)()
+      .isPresent;
   };
 }

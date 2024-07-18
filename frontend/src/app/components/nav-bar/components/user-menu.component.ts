@@ -2,6 +2,8 @@ import { Component, inject, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { UserFeature } from '../../../state/user/user-feature';
 import { UserDataService } from '../../../state/services/user-data.service';
+import { UiStateFeature } from '../../../state/ui-state';
+import { JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-user-menu',
@@ -11,7 +13,7 @@ import { UserDataService } from '../../../state/services/user-data.service';
 
   template: `
     <div class="btn">
-      @if(userLoaded()) {
+      @if(userState().isPresent ){
       {{ user() }}
       } @else {
       <span class="loading loading-infinity loading-md"></span>
@@ -20,16 +22,10 @@ import { UserDataService } from '../../../state/services/user-data.service';
   `,
   styles: ``,
 })
-export class UserMenuComponent implements OnInit {
+export class UserMenuComponent {
   store = inject(Store);
 
   user = this.store.selectSignal(UserFeature.selectSub);
+  userState = this.store.selectSignal(UiStateFeature.selectUser);
   userLoaded = this.store.selectSignal(UserFeature.selectUserLoaded);
-
-  constructor(private userDataService: UserDataService) {
-    // inject
-  }
-  ngOnInit(): void {
-    // Not a injection context. Inject won't work here.
-  }
 }

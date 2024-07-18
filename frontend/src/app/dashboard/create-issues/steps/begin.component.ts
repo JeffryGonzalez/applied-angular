@@ -1,12 +1,13 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { UserSoftwareFeature } from '../../state/reducers/user-software.feature';
+import { debounceTime, map } from 'rxjs';
 import { SoftwareListActions } from '../../state/actions/list.actions';
-
+import { UserSoftwareFeature } from '../../state/reducers/user-software.feature';
 @Component({
   selector: 'app-create-issue-begin',
   standalone: true,
-  imports: [],
+  imports: [ReactiveFormsModule],
   template: ` <div>
     <div class="card bg-base-100 shadow-xl">
       <div class="card-body">
@@ -17,19 +18,17 @@ import { SoftwareListActions } from '../../state/actions/list.actions';
           <div class="card-actions justify-start">
             <div class="flex">
               <div>
-                <div>
+                <form [formGroup]="form" (ngSubmit)="filter()">
                   <label class="input input-bordered flex items-center gap-2">
                     <input
-                      #taco
+                      formControlName="payload"
                       type="text"
                       class="grow"
                       placeholder="Search"
                     />
-                    <span (click)="filter(taco.value)" class="badge badge-info"
-                      >?</span
-                    >
+                    <span class="badge badge-info">?</span>
                   </label>
-                </div>
+                </form>
                 <table class="table">
                   <thead>
                     <tr>
@@ -71,11 +70,28 @@ import { SoftwareListActions } from '../../state/actions/list.actions';
   </div>`,
   styles: ``,
 })
-export class BeginComponent {
+export class BeginComponent implements OnInit {
   #store = inject(Store);
   software = this.#store.selectSignal(UserSoftwareFeature.selectFilteredList);
 
-  filter(what: string) {
+  form = new FormGroup({
+    payload: new FormControl<string>(''),
+  });
+  filter() {
+    const what = this.form.controls.payload.value || '';
     this.#store.dispatch(SoftwareListActions.listFilteredBy({ payload: what }));
+  }
+
+  ngOnInit(): void {
+    const sub = this.form.controls.payload.valueChanges
+      .pipe(
+        debounceTime(250),
+        map((val) =>
+          this.#store.dispatch(
+            SoftwareListActions.listFilteredBy({ payload: val || '' })
+          )
+        )
+      )
+      .subscribe(); // TODO: UNSUBSCRIBE
   }
 }

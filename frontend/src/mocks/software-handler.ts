@@ -3,11 +3,27 @@ import { delay, http, HttpResponse } from 'msw';
 const software = [
   {
     id: '1',
-    name: 'Word',
+    name: 'Word (Microsoft)',
   },
   {
     id: '2',
-    name: 'Excel',
+    name: 'Excel (Microsoft)',
+  },
+  {
+    id: '3',
+    name: 'Visual Studio Code (Microsoft)',
+  },
+  {
+    id: '4',
+    name: 'Destiny 2 (Bungie)',
+  },
+  {
+    id: '5',
+    name: 'Rider (Jetbrains)',
+  },
+  {
+    id: '6',
+    name: 'Visual Studio (Microsoft)',
   },
 ];
 

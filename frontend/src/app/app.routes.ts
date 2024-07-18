@@ -1,9 +1,5 @@
 import { CanActivateFn, Routes } from '@angular/router';
 import { StudentsComponent } from './students/students.component';
-import { inject } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { UserFeature } from './state/user/user-feature';
-import { UserDataService } from './state/services/user-data.service';
 
 export const routes: Routes = [
   {
