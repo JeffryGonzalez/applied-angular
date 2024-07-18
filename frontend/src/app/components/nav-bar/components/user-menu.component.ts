@@ -1,9 +1,7 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { UserFeature } from '../../../state/user/user-feature';
-import { UserDataService } from '../../../state/services/user-data.service';
 import { UiStateFeature } from '../../../state/ui-state';
-import { JsonPipe } from '@angular/common';
+import { UserFeature } from '../../../state/user/user-feature';
 
 @Component({
   selector: 'app-user-menu',
@@ -13,10 +11,10 @@ import { JsonPipe } from '@angular/common';
 
   template: `
     <div class="btn">
-      @if(userState().isPresent ){
-      {{ user() }}
+      @if (userState().isPresent) {
+        {{ user() }}
       } @else {
-      <span class="loading loading-infinity loading-md"></span>
+        <span class="loading loading-infinity loading-md"></span>
       }
     </div>
   `,

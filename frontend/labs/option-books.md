@@ -43,7 +43,7 @@ books = toSignal(
     .get<{
       data: { id: string; title: string; author: string; year: number }[];
     }>("/api/books")
-    .pipe(map((res) => res.data))
+    .pipe(map((res) => res.data)),
 );
 ```
 

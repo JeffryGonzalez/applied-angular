@@ -11,7 +11,7 @@ export const routes: Routes = [
         path: 'signals',
         loadComponent: () =>
           import('./students/signals/signals.component').then(
-            (c) => c.SignalsComponent
+            (c) => c.SignalsComponent,
           ),
       },
     ],

@@ -11,7 +11,7 @@ import { UiStateEvents } from '.';
 
 export const navigationInterceptor: HttpInterceptorFn = (
   req: HttpRequest<unknown>,
-  next: HttpHandlerFn
+  next: HttpHandlerFn,
 ) => {
   const store = inject(Store);
   const { method, url } = req;
@@ -25,9 +25,9 @@ export const navigationInterceptor: HttpInterceptorFn = (
       if (r.type === HttpEventType.Response) {
         const responsePayload = { ...payload, status: r.status };
         store.dispatch(
-          UiStateEvents.navigationEnd({ payload: responsePayload })
+          UiStateEvents.navigationEnd({ payload: responsePayload }),
         );
       }
-    })
+    }),
   );
 };

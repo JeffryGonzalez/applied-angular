@@ -15,10 +15,13 @@ export class EntitleSoftwareEffect {
       switchMap(() =>
         this.client.get<{ data: SoftwareItem[] }>('/api/user/software').pipe(
           map((response) => response.data),
-          map((payload) => SoftwareListActions.entitledSoftware({ payload }))
-        )
-      )
+          map((payload) => SoftwareListActions.entitledSoftware({ payload })),
+        ),
+      ),
     );
   });
-  constructor(private actions$: Actions, private client: HttpClient) {}
+  constructor(
+    private actions$: Actions,
+    private client: HttpClient,
+  ) {}
 }

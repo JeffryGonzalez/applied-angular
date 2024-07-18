@@ -39,29 +39,25 @@ import { UserSoftwareFeature } from '../../state/reducers/user-software.feature'
                     </tr>
                   </thead>
                   <tbody>
-                    @for(item of software(); track item.id; let even = $even) {
-
-                    <tr>
-                      <td>
-                        <label>
-                          <input type="radio" class="radio" />
-                        </label>
-                      </td>
-                      @if(even) {
-
-                      <td class="hover">
-                        {{ item.name }}
-                      </td>
-                      } @else {
-
-                      <td>
-                        {{ item.name }}
-                      </td>
-                      }
-                    </tr>
+                    @for (item of software(); track item.id; let even = $even) {
+                      <tr>
+                        <td>
+                          <label>
+                            <input type="radio" class="radio" />
+                          </label>
+                        </td>
+                        @if (even) {
+                          <td class="hover">
+                            {{ item.name }}
+                          </td>
+                        } @else {
+                          <td>
+                            {{ item.name }}
+                          </td>
+                        }
+                      </tr>
                     } @empty {
-
-                    <p>No software matches your search.</p>
+                      <p>No software matches your search.</p>
                     }
                   </tbody>
                 </table>
@@ -98,9 +94,9 @@ export class BeginComponent implements OnInit {
         debounceTime(250),
         map((val) =>
           this.#store.dispatch(
-            SoftwareListActions.listFilteredBy({ payload: val || '' })
-          )
-        )
+            SoftwareListActions.listFilteredBy({ payload: val || '' }),
+          ),
+        ),
       )
       .subscribe(); // TODO: UNSUBSCRIBE
   }

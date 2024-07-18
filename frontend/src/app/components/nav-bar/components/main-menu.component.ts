@@ -10,11 +10,13 @@ import { LinkItemComponent } from './link-item.component';
   imports: [RouterLink, LinkItemChildrenComponent, LinkItemComponent],
   template: `
     <ul class="menu menu-horizontal px-1">
-      @for(link of listOfLinks(); track $index) { @if(link.children) {
-      <app-link-item-children [link]="link" />
-      } @else {
-      <app-link-item [link]="link" />
-      } }
+      @for (link of listOfLinks(); track $index) {
+        @if (link.children) {
+          <app-link-item-children [link]="link" />
+        } @else {
+          <app-link-item [link]="link" />
+        }
+      }
     </ul>
   `,
   styles: ``,
