@@ -3,7 +3,7 @@ import { http, HttpResponse, delay } from 'msw';
 const handlers = [
   http.get('/api/user', async () => {
     // await delay(3000);
-    return HttpResponse.json({ sub: 'Charlie Brown' });
+    return HttpResponse.json({ sub: 'Justin Lueckel' });
   }),
 ];
 
