@@ -1,29 +1,34 @@
 import { Component, effect, signal } from '@angular/core';
+import { UserPreferencesService } from '../state/services/user-preferences.service';
 
 @Component({
   selector: 'app-counter',
   standalone: true,
   imports: [],
-  template: ` <h1>Let's Count</h1>
-    <p>Num {{ num() }}</p>
-    <div>
+  template: ` <div class="flex flex-col items-center mt-5">
+    <h1>Let's Count</h1>
+    <p>{{ num() }}, ah ah ah</p>
+    <div class="mt-2">
       <button
         (click)="decrement()"
         [disabled]="disabled"
-        class="btn btn-primary">
+        class="btn btn-primary mr-2">
         -
       </button>
       <button (click)="increment()" class="btn btn-primary">+</button>
       @if (fizz) {
-        <p>fizz!</p>
+        <p class="color-red font-mono font-bold mt-2 text-center">fizz!</p>
       }
       @if (buzz) {
-        <p>buzz!!</p>
+        <p class="font-mono font-bold mt-2 text-center">buzz!</p>
       }
       @if (fizzBuzz) {
-        <p>fizz buzz!!!</p>
+        <p class="font-mono font-extrabold mt-2 text-center uppercase">
+          fizz buzz!
+        </p>
       }
-    </div>`,
+    </div>
+  </div>`,
   styles: ``,
 })
 export class CounterComponents {
@@ -31,17 +36,25 @@ export class CounterComponents {
   fizz = false;
   buzz = false;
   fizzBuzz = false;
-
+  count = 0;
   num = signal(0);
 
+  constructor(private service: UserPreferencesService) {}
+
+  ngOnInit() {
+    this.service.getPrefs();
+    this.count = this.service.getPrefs().valueOf();
+  }
+
   increment() {
-    this.num.set(this.num() + 1);
+    this.num.set(this.num() + this.count);
     this.checkForDisabled();
     this.doFizzbuzzMath();
   }
 
   decrement() {
-    this.num.set(this.num() - 1);
+    this.num.set(this.num() - this.count);
+
     this.checkForDisabled();
     this.doFizzbuzzMath();
   }
@@ -72,5 +85,9 @@ export class CounterComponents {
     } else {
       this.fizzBuzz = false;
     }
+  }
+
+  getCount() {
+    this.service.getPrefs();
   }
 }

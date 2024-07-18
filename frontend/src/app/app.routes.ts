@@ -33,6 +33,13 @@ export const routes: Routes = [
             c => c.CounterComponents
           ),
       },
+      {
+        path: 'prefs',
+        loadComponent: () =>
+          import('./labs/components/prefs.component').then(
+            c => c.PrefsComponent
+          ),
+      },
     ],
   },
 ];
