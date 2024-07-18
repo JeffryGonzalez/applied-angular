@@ -11,7 +11,7 @@ import { UserFeature } from '../../../state/user/user-feature';
 
   template: `
     <div class="btn">
-      @if (userState().isPresent) {
+      @if (userState()) {
         {{ user() }}
       } @else {
         <span class="loading loading-infinity loading-md"></span>
@@ -25,5 +25,5 @@ export class UserMenuComponent {
 
   user = this.store.selectSignal(UserFeature.selectSub);
   userState = this.store.selectSignal(UiStateFeature.selectUser);
-  userLoaded = this.store.selectSignal(UserFeature.selectUserLoaded);
+  // userLoaded = this.store.selectSignal(UserFeature.selectUserLoaded);
 }

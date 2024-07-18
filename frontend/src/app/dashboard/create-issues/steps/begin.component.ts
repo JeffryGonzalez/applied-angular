@@ -1,7 +1,7 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { debounceTime, map } from 'rxjs';
+import { debounceTime, map, Subscription } from 'rxjs';
 import { SoftwareListActions } from '../../state/actions/list.actions';
 import { UserSoftwareFeature } from '../../state/reducers/user-software.feature';
 @Component({
@@ -24,8 +24,7 @@ import { UserSoftwareFeature } from '../../state/reducers/user-software.feature'
                       formControlName="payload"
                       type="text"
                       class="grow"
-                      placeholder="Search"
-                    />
+                      placeholder="Search" />
                     <span class="badge badge-info">?</span>
                   </label>
                 </form>
@@ -76,7 +75,7 @@ import { UserSoftwareFeature } from '../../state/reducers/user-software.feature'
   </div>`,
   styles: ``,
 })
-export class BeginComponent implements OnInit {
+export class BeginComponent implements OnInit, OnDestroy {
   #store = inject(Store);
   software = this.#store.selectSignal(UserSoftwareFeature.selectFilteredList);
 
@@ -87,17 +86,22 @@ export class BeginComponent implements OnInit {
     const what = this.form.controls.payload.value || '';
     this.#store.dispatch(SoftwareListActions.listFilteredBy({ payload: what }));
   }
-
+  #subscriptions: Subscription[] = [];
   ngOnInit(): void {
     const sub = this.form.controls.payload.valueChanges
       .pipe(
-        debounceTime(250),
-        map((val) =>
+        debounceTime(500),
+        map(val =>
           this.#store.dispatch(
-            SoftwareListActions.listFilteredBy({ payload: val || '' }),
-          ),
-        ),
+            SoftwareListActions.listFilteredBy({ payload: val || '' })
+          )
+        )
       )
-      .subscribe(); // TODO: UNSUBSCRIBE
+      .subscribe();
+
+    this.#subscriptions.push(sub);
+  }
+  ngOnDestroy(): void {
+    this.#subscriptions.forEach(s => s.unsubscribe());
   }
 }

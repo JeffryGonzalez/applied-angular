@@ -12,9 +12,12 @@ import { LinkDirective } from '../directives/link.directive';
   template: `
     <h1>Welcome to the Dashboard</h1>
     <ul>
+      <li><a class="link link-primary">This is a Link, Too</a></li>
       <li><a appLink intent="secondary" routerLink="mock">See the mock</a></li>
       <li>
-        <a appLink routerLink="create-issue">Create an Issue</a>
+        <a appLink intent="warning" routerLink="create-issue"
+          >Create an Issue</a
+        >
       </li>
     </ul>
 
