@@ -11,6 +11,7 @@ import { LinkDirective } from '../directives/link.directive';
     <ul>
       <li><a appLink routerLink="counter">Counter</a></li>
       <li><a appLink routerLink="prefs">Pref</a></li>
+      <li><a appLink routerLink="books">Book List</a></li>
     </ul>
     <router-outlet />
   `,
