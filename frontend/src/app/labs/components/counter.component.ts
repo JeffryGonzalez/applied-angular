@@ -1,6 +1,6 @@
-import { Component, effect, OnDestroy, OnInit, signal } from '@angular/core';
+import { Component, effect, OnInit, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { debounceTime, map, Subscription } from 'rxjs';
+import { IncrementService } from '../services/increment.service';
 
 @Component({
   selector: 'app-counter',
@@ -16,25 +16,6 @@ import { debounceTime, map, Subscription } from 'rxjs';
           <p>Lower Limit: {{ lowerLimit }}</p>
           <p>Upper Limit: {{ upperLimit }}</p>
           <p>Increment: {{ incrementValue() }}</p>
-        </div>
-        <br />
-        <div>
-          <form [formGroup]="form">
-            <input
-              type="range"
-              min="1"
-              max="5"
-              value="1"
-              class="range"
-              step="1"
-              formControlName="increment"
-              class="range range-sm" />
-            <div class="flex w-full justify-between px-2 text-xs">
-              <span>1</span>
-              <span>3</span>
-              <span>5</span>
-            </div>
-          </form>
         </div>
         <br />
         <div class="divider"></div>
@@ -66,7 +47,7 @@ import { debounceTime, map, Subscription } from 'rxjs';
   `,
   styles: ``,
 })
-export class CounterComponent implements OnInit, OnDestroy {
+export class CounterComponent implements OnInit {
   upperLimit = 15;
   lowerLimit = 0;
   count = signal(0);
@@ -77,13 +58,26 @@ export class CounterComponent implements OnInit, OnDestroy {
     increment: new FormControl<number>(this.incrementValue()),
   });
 
-  constructor() {
+  constructor(private service: IncrementService) {
     effect(
       () => {
         this.updateFizzBuzz(this.count());
       },
       { allowSignalWrites: true } // How bad of an idea is this?
     );
+  }
+
+  ngOnInit(): void {
+    // setInterval(this.updateIncrement, 1000);
+    setInterval(() => {
+      this.refresh(this.service);
+    }, 1000);
+  }
+
+  refresh(incrementService: IncrementService) {
+    // console.log(incrementService);
+    // const newValue = this.service.getIncrement();
+    this.incrementValue.set(incrementService.getIncrement());
   }
 
   add() {
@@ -139,27 +133,5 @@ export class CounterComponent implements OnInit, OnDestroy {
     }
 
     this.fizzBuzz.set('');
-  }
-
-  #subscriptions: Subscription[] = [];
-  ngOnInit(): void {
-    console.log('oninit');
-    const sub = this.form.controls.increment.valueChanges
-      .pipe(
-        // debounceTime(500),
-        map(
-          //   val => console.log(val)
-          val => this.incrementValue.set(val!)
-          //   this.#store.dispatch(
-          //     SoftwareListActions.listFilteredBy({ payload: val || '' })
-          //  )
-        )
-      )
-      .subscribe();
-
-    this.#subscriptions.push(sub);
-  }
-  ngOnDestroy(): void {
-    this.#subscriptions.forEach(s => s.unsubscribe());
   }
 }
