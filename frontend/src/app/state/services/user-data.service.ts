@@ -11,4 +11,8 @@ export class UserDataService {
   getUser() {
     return this.http.get<User>('/api/user');
   }
+
+  updatePrefs(prefs: User['prefs']) {
+    return this.http.put<User>('/api/user', prefs);
+  }
 }

@@ -1,6 +1,7 @@
 import { CanActivateFn, Routes } from '@angular/router';
 import { StudentsComponent } from './students/students.component';
 import { LabsComponent } from './labs/labs.component';
+import { PrefsComponent } from './labs/components/prefs/prefs.component';
 
 export const routes: Routes = [
   {
@@ -25,6 +26,19 @@ export const routes: Routes = [
   {
     path: 'labs',
     component: LabsComponent,
+    children: [
+      {
+        path: 'counter',
+        loadComponent: () =>
+          import('./labs/components/counter/counter.component').then(
+            (c) => c.CounterComponent,
+          ),
+      },
+    ],
+  },
+  {
+    path: 'prefs',
+    component: PrefsComponent,
   },
 ];
 

@@ -18,3 +18,17 @@ export const loadUser = createEffect(
   },
   { functional: true },
 );
+
+// export const updatePrefs = createEffect(
+//   (actions$ = inject(Actions), service = inject(UserDataService)) => {
+//     return actions$.pipe(
+//       ofType(UserActions.updatePrefs),
+//       switchMap(({ payload }) =>
+//         service
+//           .updatePrefs(payload)
+//           .pipe(map(() => UserActions.getTheUser())),
+//       ),
+//     );
+//   },
+//   { functional: true },
+// );
