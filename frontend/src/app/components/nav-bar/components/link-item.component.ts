@@ -11,9 +11,11 @@ import { UserFeature } from '../../../state/user/user-feature';
   template: `
     @if (userLoaded() || link().label != 'Dashboard') {
       <li>
-        <a [routerLink]="link().link" [routerLinkActive]="'btn'">{{
-          link().label
-        }}</a>
+        <a
+          [routerLink]="link().link"
+          [routerLinkActive]="['btn', 'font-bold']"
+          >{{ link().label }}</a
+        >
       </li>
     }
   `,
