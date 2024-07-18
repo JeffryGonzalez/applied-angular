@@ -24,14 +24,7 @@ export const routes: Routes = [
   },
   {
     path: 'labs',
-    component: LabsComponent,
-    children: [
-      {
-        path: 'counter',
-        loadComponent: () =>
-          import('./labs/counter.component').then(c => c.CounterComponent),
-      },
-    ],
+    loadChildren: () => import('./labs/labs.routes').then(r => r.LABS_ROUTES),
   },
 ];
 

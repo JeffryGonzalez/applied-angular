@@ -1,4 +1,5 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
+import { IncreasorService } from './services/increasor.service';
 
 @Component({
   selector: 'app-counter',
@@ -10,7 +11,7 @@ import { Component, signal } from '@angular/core';
     <div>
       <button
         (click)="decrement()"
-        class="btn btn-primary"
+        class="btn btn-secondary"
         [disabled]="counter() <= 0">
         -
       </button>
@@ -22,22 +23,25 @@ import { Component, signal } from '@angular/core';
 })
 export class CounterComponent {
   counter = signal(0);
+  increaseBy = inject(IncreasorService);
 
   decrement() {
-    this.counter.set(this.counter() - 1);
+    this.counter.set(this.counter() - this.increaseBy.getIncreasor());
   }
   increment() {
-    this.counter.set(this.counter() + 1);
+    this.counter.set(this.counter() + this.increaseBy.getIncreasor());
   }
 
   fizzBuzz() {
     let num = this.counter();
-    return num % 3 === 0 && num % 5 === 0
-      ? 'FizzBuzz'
-      : num % 3 === 0
-        ? 'Fizz'
-        : num % 5 === 0
-          ? 'Buzz'
-          : '';
+    return num === 0
+      ? ''
+      : num % 3 === 0 && num % 5 === 0
+        ? 'FizzBuzz'
+        : num % 3 === 0
+          ? 'Fizz'
+          : num % 5 === 0
+            ? 'Buzz'
+            : '';
   }
 }
