@@ -4,6 +4,7 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { Store } from '@ngrx/store';
 import { UserActions } from './state/user/actions';
 import { UserFeature } from './state/user/user-feature';
+import { MyCounter, countBy, countByValues, counterValue } from '../app/labs/components/counter';
 
 @Component({
   selector: 'app-root',
