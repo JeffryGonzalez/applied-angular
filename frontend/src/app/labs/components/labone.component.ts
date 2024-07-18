@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { toSignal } from '@angular/core/rxjs-interop';
 import { JsonPipe } from '@angular/common';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { map } from 'rxjs';
+import { bookList } from '../models/books';
 @Component({
   selector: 'app-labtwo',
   standalone: true,
@@ -15,4 +16,14 @@ import { map } from 'rxjs';
   `,
   styles: ``,
 })
-export class LabOneComponent {}
+export class LabOneComponent {
+  client = inject(HttpClient);
+
+  books = toSignal(
+    this.client
+      .get<{
+        data: bookList;
+      }>('/api/books')
+      .pipe(map(res => res.data))
+  );
+}
