@@ -20,8 +20,10 @@ export const navigationInterceptor: HttpInterceptorFn = (
     url,
     method,
   };
+  // this happens when there is a request.
   store.dispatch(UiStateEvents.navigation({ payload }));
   return next(req).pipe(
+    // do the next thing and all the other interceptors and the actual call and when that is done return the request
     tap(r => {
       if (r.type === HttpEventType.Response) {
         const responsePayload = { ...payload, status: r.status };
