@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, effect, signal } from '@angular/core';
 
 @Component({
   selector: 'app-counter',
@@ -44,14 +44,21 @@ export class CounterComponent {
   count = signal(0);
   fizzBuzz = signal('');
 
+  constructor() {
+    effect(
+      () => {
+        this.updateFizzBuzz(this.count());
+      },
+      { allowSignalWrites: true } // How bad of an idea is this?
+    );
+  }
+
   add() {
     this.count.set(this.count() + 1);
-    this.updateFizzBuzz();
   }
 
   subtract() {
     this.count.set(this.count() - 1);
-    this.updateFizzBuzz();
   }
 
   greaterThanLowerLimit(): boolean {
@@ -62,9 +69,14 @@ export class CounterComponent {
     return this.count() == this.upperLimit;
   }
 
-  updateFizzBuzz() {
-    const remainder_3 = this.count() % 3;
-    const remainder_5 = this.count() % 5;
+  updateFizzBuzz(count: number) {
+    if (count == 0) {
+      this.fizzBuzz.set('');
+      return;
+    }
+
+    const remainder_3 = count % 3;
+    const remainder_5 = count % 5;
 
     if (remainder_3 == 0 && remainder_5 == 0) {
       this.fizzBuzz.set('FizzBuzz');
