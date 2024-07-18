@@ -11,7 +11,7 @@ import { NavbarLinks } from './models';
   template: `
     <div class="navbar bg-base-100">
       <div class="navbar-start">
-        <app-side-menu />
+        <app-side-menu [listOfLinks]="topNavLinks()" />
         <a class="btn btn-ghost text-xl">Help Desk</a>
       </div>
       <div class="navbar-center hidden lg:flex">
@@ -37,6 +37,16 @@ export class NavBarComponent {
     {
       label: 'Labs',
       link: '/labs',
+      children: [
+        {
+          label: 'Lab One',
+          link: '/labs/labone',
+        },
+        {
+          label: 'Lab Two',
+          link: '/labs/labtwo',
+        },
+      ],
     },
   ]);
 }

@@ -24,6 +24,7 @@
     "@ngrx/store": "^18.0.1",
     "@ngrx/store-devtools": "^18.0.1",
     "@nozbe/microfuzz": "^1.0.0",
+    "angular-new-router": "github:angular/router",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.3"

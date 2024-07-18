@@ -25,5 +25,4 @@ export class UserMenuComponent {
 
   user = this.store.selectSignal(UserFeature.selectSub);
   userState = this.store.selectSignal(UiStateFeature.selectUser);
-  // userLoaded = this.store.selectSignal(UserFeature.selectUserLoaded);
 }

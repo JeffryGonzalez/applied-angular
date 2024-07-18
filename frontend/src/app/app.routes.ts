@@ -11,7 +11,7 @@ export const routes: Routes = [
         path: 'signals',
         loadComponent: () =>
           import('./students/signals/signals.component').then(
-            (c) => c.SignalsComponent,
+            c => c.SignalsComponent
           ),
       },
     ],
@@ -20,11 +20,11 @@ export const routes: Routes = [
     path: 'dashboard',
     canActivate: [],
     loadChildren: () =>
-      import('./dashboard/dashboard.routes').then((r) => r.DASHBOARD_ROUTES),
+      import('./dashboard/dashboard.routes').then(r => r.DASHBOARD_ROUTES),
   },
   {
     path: 'labs',
-    component: LabsComponent,
+    loadChildren: () => import('./labs/labs.routes').then(r => r.LAB_ROUTES),
   },
 ];
 
