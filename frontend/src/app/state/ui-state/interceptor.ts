@@ -8,10 +8,11 @@ import { inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { tap } from 'rxjs';
 import { UiStateEvents } from '.';
+import { computed } from '@angular/core';
 
 export const navigationInterceptor: HttpInterceptorFn = (
   req: HttpRequest<unknown>,
-  next: HttpHandlerFn,
+  next: HttpHandlerFn
 ) => {
   const store = inject(Store);
   const { method, url } = req;
@@ -21,13 +22,13 @@ export const navigationInterceptor: HttpInterceptorFn = (
   };
   store.dispatch(UiStateEvents.navigation({ payload }));
   return next(req).pipe(
-    tap((r) => {
+    tap(r => {
       if (r.type === HttpEventType.Response) {
         const responsePayload = { ...payload, status: r.status };
         store.dispatch(
-          UiStateEvents.navigationEnd({ payload: responsePayload }),
+          UiStateEvents.navigationEnd({ payload: responsePayload })
         );
       }
-    }),
+    })
   );
 };

@@ -72,3 +72,13 @@ Some examples:
 - It seems like just about every component we navigate to has some random "header" like thing at the top. They are all different. Can we formalize that? Maybe make a "PageHeader" component and use that across the application?
 
 - What else can you find? You do not need to create Github issues - just do it.
+
+### Option 4.a - Code Cleanup
+
+I installed prettier and gave it some basic rules. (in the `.prettierrc.json` file).
+
+Go to a terminal and type "ng lint".
+
+This will give you a list of the issues that prettier found. See which ones you can fix.
+
+If you don't like a certain rule, or want to add more, add it to your pull request.
