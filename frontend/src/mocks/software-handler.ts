@@ -29,7 +29,7 @@ const software = [
 
 const handlers = [
   http.get('/api/user/software', async () => {
-    await delay(3000);
+    //await delay(3000);
 
     return HttpResponse.json({
       data: software,

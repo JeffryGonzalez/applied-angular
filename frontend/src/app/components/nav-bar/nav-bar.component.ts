@@ -34,5 +34,9 @@ export class NavBarComponent {
       label: 'Dashboard',
       link: '/dashboard',
     },
+    {
+      label: 'Labs',
+      link: '/labs',
+    },
   ]);
 }

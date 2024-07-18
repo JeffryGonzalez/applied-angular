@@ -1,5 +1,6 @@
 import { CanActivateFn, Routes } from '@angular/router';
 import { StudentsComponent } from './students/students.component';
+import { LabsComponent } from './labs/labs.component';
 
 export const routes: Routes = [
   {
@@ -20,6 +21,10 @@ export const routes: Routes = [
     canActivate: [],
     loadChildren: () =>
       import('./dashboard/dashboard.routes').then((r) => r.DASHBOARD_ROUTES),
+  },
+  {
+    path: 'labs',
+    component: LabsComponent,
   },
 ];
 

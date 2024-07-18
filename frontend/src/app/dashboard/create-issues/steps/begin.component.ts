@@ -29,27 +29,37 @@ import { UserSoftwareFeature } from '../../state/reducers/user-software.feature'
                     <span class="badge badge-info">?</span>
                   </label>
                 </form>
-                <table class="table">
+                <table class="table w-3/4">
                   <thead>
                     <tr>
-                      <th>Software</th>
+                      <th></th>
+                    </tr>
+                    <tr>
+                      Software
                     </tr>
                   </thead>
                   <tbody>
                     @for(item of software(); track item.id; let even = $even) {
-                    @if(even) {
-                    <tr class="hover">
-                      {{
-                        item.name
-                      }}
-                    </tr>
-                    } @else {
+
                     <tr>
-                      {{
-                        item.name
-                      }}
+                      <td>
+                        <label>
+                          <input type="radio" class="radio" />
+                        </label>
+                      </td>
+                      @if(even) {
+
+                      <td class="hover">
+                        {{ item.name }}
+                      </td>
+                      } @else {
+
+                      <td>
+                        {{ item.name }}
+                      </td>
+                      }
                     </tr>
-                    } } @empty {
+                    } @empty {
 
                     <p>No software matches your search.</p>
                     }
