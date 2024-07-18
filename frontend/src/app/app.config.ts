@@ -1,4 +1,8 @@
-import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
+import {
+  ApplicationConfig,
+  provideZoneChangeDetection,
+  isDevMode,
+} from '@angular/core';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { provideRouter, withDebugTracing } from '@angular/router';
 
@@ -10,6 +14,7 @@ import { provideEffects } from '@ngrx/effects';
 import { loadUser } from './state/user/get-user.effect';
 import { UiStateFeature } from './state/ui-state';
 import { navigationInterceptor } from './state/ui-state/interceptor';
+// import { provideServiceWorker } from '@angular/service-worker';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -21,5 +26,9 @@ export const appConfig: ApplicationConfig = {
     provideState(UiStateFeature),
     provideStoreDevtools(), // maybe do this only in isDev
     provideEffects({ loadUser: loadUser }),
+    // provideServiceWorker('ngsw-worker.js', {
+    //         enabled: !isDevMode(),
+    //         registrationStrategy: 'registerWhenStable:30000'
+    //       }),
   ],
 };
