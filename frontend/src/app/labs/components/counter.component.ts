@@ -8,11 +8,23 @@ import { IncrementService } from '../services/increment.service';
   imports: [ReactiveFormsModule],
   template: `
     <div
-      class="card bg-base-100 w-96 shadow-xl card-bordered border-gray-400 border-b-4">
+      class="card bg-base-100 w-1/2 shadow-xl card-bordered border-gray-400 border-b-4">
       <div class="card-body">
         <h2 class="card-title">Counter</h2>
         <br />
         <div>
+          <p>
+            The counter will count up or down by the specified increment. If the
+            next action goes above or below a limit, the limit will be assigned
+            to the counters value.
+          </p>
+          <br />
+          <p>
+            The incrememnt will refresh, from a separate component on a 1 second
+            interval. I did this so I could see it all at once instead of
+            clicking links. It is still two components using a "service" (hack)
+          </p>
+          <br />
           <p>Lower Limit: {{ lowerLimit }}</p>
           <p>Upper Limit: {{ upperLimit }}</p>
           <p>Increment: {{ incrementValue() }}</p>
@@ -101,11 +113,11 @@ export class CounterComponent implements OnInit {
   }
 
   greaterThanLowerLimit(): boolean {
-    return !(this.count() >= this.lowerLimit);
+    return this.count() == this.lowerLimit;
   }
 
   lessThanUpperLimit(): boolean {
-    return !(this.count() <= this.upperLimit);
+    return this.count() == this.upperLimit;
   }
 
   updateFizzBuzz(count: number) {
