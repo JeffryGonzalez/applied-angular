@@ -6,8 +6,8 @@ import { Injectable } from '@angular/core';
 export class IncreasorService {
   increasedBy = 1;
 
-  setIncreasor(by: number) {
-    this.increasedBy = by;
+  setIncreasor(num: number) {
+    this.increasedBy = num;
   }
 
   getIncreasor() {
