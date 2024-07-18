@@ -14,7 +14,6 @@ import { UserFeature } from '../../../state/user/user-feature';
       @if (userState()) {
         {{ user() }}
       } @else {
-        Hello
         <span class="loading loading-infinity loading-md"></span>
       }
     </div>
