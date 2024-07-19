@@ -1,6 +1,6 @@
 import { Component, effect, OnInit, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { IncrementService } from '../services/increment.service';
+import { CounterPreferencesService } from '../services/counter-preferences.service';
 
 @Component({
   selector: 'app-counter',
@@ -70,7 +70,7 @@ export class CounterComponent implements OnInit {
     increment: new FormControl<number>(this.incrementValue()),
   });
 
-  constructor(private service: IncrementService) {
+  constructor(private prefsService: CounterPreferencesService) {
     effect(
       () => {
         this.updateFizzBuzz(this.count());
@@ -80,16 +80,14 @@ export class CounterComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // setInterval(this.updateIncrement, 1000);
     setInterval(() => {
-      this.refresh(this.service);
+      this.refreshPrefs(this.prefsService);
     }, 1000);
   }
 
-  refresh(incrementService: IncrementService) {
-    // console.log(incrementService);
-    // const newValue = this.service.getIncrement();
-    this.incrementValue.set(incrementService.getIncrement());
+  refreshPrefs(prefsService: CounterPreferencesService) {
+    const prefs = prefsService.getCounterPerfs();
+    this.incrementValue.set(prefs.increment);
   }
 
   add() {

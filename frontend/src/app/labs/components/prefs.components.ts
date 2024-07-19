@@ -1,7 +1,8 @@
 import { Component, OnDestroy, OnInit, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { map, Subscription } from 'rxjs';
-import { IncrementService } from '../services/increment.service';
+import { CounterPreferencesService } from '../services/counter-preferences.service';
+import { CounterPreferences } from '../models';
 
 @Component({
   selector: 'app-prefs',
@@ -38,8 +39,19 @@ import { IncrementService } from '../services/increment.service';
 })
 export class PrefsComponents implements OnInit, OnDestroy {
   incrementValue = signal(1);
+  counterPrefs: CounterPreferences = {
+    increment: 1,
+    upperLimit: 15,
+    lowerLimit: 0,
+  };
 
-  constructor(private service: IncrementService) {}
+  constructor(private prefsService: CounterPreferencesService) {
+    this.counterPrefs = this.prefsService.getCounterPerfs();
+
+    // Why was a signal not working here?
+    this.form.controls.increment.setValue(this.counterPrefs.increment);
+    // this.incrementValue.set(this.counterPrefs.increment);
+  }
 
   form = new FormGroup({
     increment: new FormControl<number>(this.incrementValue()),
@@ -47,9 +59,13 @@ export class PrefsComponents implements OnInit, OnDestroy {
 
   #subscriptions: Subscription[] = [];
   ngOnInit(): void {
-    console.log('oninit');
     const sub = this.form.controls.increment.valueChanges
-      .pipe(map(val => this.service.updateIncrement(val!)))
+      .pipe(
+        map(val => {
+          this.counterPrefs.increment = val!;
+          this.prefsService.updateCounterPerfs(this.counterPrefs);
+        })
+      )
       .subscribe();
 
     this.#subscriptions.push(sub);
