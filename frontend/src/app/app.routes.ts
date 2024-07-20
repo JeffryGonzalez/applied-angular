@@ -1,6 +1,5 @@
 import { CanActivateFn, Routes } from '@angular/router';
 import { StudentsComponent } from './students/students.component';
-import { LabsComponent } from './labs/labs.component';
 
 export const routes: Routes = [
   {
