@@ -1,18 +1,18 @@
 import { Component, input } from '@angular/core';
-import { NavbarLinks } from '../models';
+import { NavItems } from '../models';
 import { RouterLink } from '@angular/router';
-import { LinkItemChildrenComponent } from './link-item-children.component';
 import { LinkItemComponent } from './link-item.component';
+import { LinkItemChildrenComponent } from './link-item-children.component';
 
 @Component({
   selector: 'app-main-menu',
   standalone: true,
-  imports: [RouterLink, LinkItemChildrenComponent, LinkItemComponent],
+  imports: [RouterLink, LinkItemComponent, LinkItemChildrenComponent],
   template: `
     <ul class="menu menu-horizontal px-1">
       @for (link of listOfLinks(); track $index) {
         @if (link.children) {
-          <app-link-item-children [link]="link" />
+          <app-link-item-children [link]="link.children" />
         } @else {
           <app-link-item [link]="link" />
         }
@@ -22,5 +22,6 @@ import { LinkItemComponent } from './link-item.component';
   styles: ``,
 })
 export class MainMenuComponent {
-  listOfLinks = input.required<NavbarLinks>();
+  // New way to provide inputs
+  listOfLinks = input.required<NavItems>();
 }
